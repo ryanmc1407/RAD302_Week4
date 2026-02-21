@@ -11,22 +11,22 @@ namespace ClassLibrary1
 {
     public class CustomerDbContext : DbContext
     {
+        
+        public CustomerDbContext(DbContextOptions<CustomerDbContext> options) : base(options)
+        {
+
+        }
         public DbSet<Customer> Customers { get; set; }
-        public CustomerDbContext()
-        {
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    var connectionstring = "Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = CustomerCoreDB-S00236888";
+        //    optionsBuilder.UseSqlServer(connectionstring)
+        //    .LogTo(Console.WriteLine,
+        //           new[] { DbLoggerCategory.Database.Command.Name },
+        //           LogLevel.Information);
 
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var connectionstring = "Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = CustomerCoreDB-S00236888";
-            optionsBuilder.UseSqlServer(connectionstring)
-            .LogTo(Console.WriteLine,
-                   new[] { DbLoggerCategory.Database.Command.Name },
-                   LogLevel.Information);
-
-          //  ActivityAPIClient.Track(StudentID: "S00236888", StudentName: "Ryan McClelland", activityName: "Rad302 2026 Week 3 Lab 1", Task: "Creating Customer DB Schema");
-        }
+        //  //  ActivityAPIClient.Track(StudentID: "S00236888", StudentName: "Ryan McClelland", activityName: "Rad302 2026 Week 3 Lab 1", Task: "Creating Customer DB Schema");
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

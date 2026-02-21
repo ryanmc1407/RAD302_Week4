@@ -1,9 +1,11 @@
-﻿using System.Diagnostics;
-using Tracker.WebAPIClient;
-using ClassLibrary1;
-using System.Runtime.InteropServices.Marshalling;
+﻿using ClassLibrary1;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.InteropServices.Marshalling;
+using Tracker.WebAPIClient;
 
 namespace RAD302Week3Lab12026.S00236888
 
@@ -15,10 +17,18 @@ namespace RAD302Week3Lab12026.S00236888
             ActivityAPIClient.Track(StudentID: "S00236888", StudentName: "Ryan McClelland", activityName: "Rad302 2026 Week 3 Lab 1", Task: "Testing Console Queries against the DB Model");
 
 
+            // 1. Set up the options to point to my Week 4 database
+            var optionsBuilder = new DbContextOptionsBuilder<CustomerDbContext>();
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=week4-db-2026-S00236888;Integrated Security=true;MultipleActiveResultSets=true;");
 
-            using CustomerDbContext db = new CustomerDbContext();
+            // 2. Pass those options into the constructor
+            using CustomerDbContext db = new CustomerDbContext(optionsBuilder.Options);
 
-            var allCustomers = db.Customers.ToList();
+            // Your existing logic remains the same
+            var allCustomers = db.Customers.ToList();// 1.Set up the options to point to my Week 4 database
+            
+
+    
 
             foreach (var c in allCustomers)
             {
