@@ -25,6 +25,7 @@ namespace RAD302Week3Lab12026WebAPIS00236888
 
             // Add services to the container.
             builder.Services.AddTransient<ICustomer<Customer>, CustomerRepository>();
+            builder.Services.AddTransient<ISupplierRepository, SupplierRepository>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
