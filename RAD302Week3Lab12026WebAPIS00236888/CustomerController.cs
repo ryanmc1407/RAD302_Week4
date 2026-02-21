@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 
 using Tracker.WebAPIClient;
+using Microsoft.AspNetCore.Authorization;
 namespace RAD302Week3Lab12026WebAPIS00236888
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
@@ -19,13 +21,15 @@ namespace RAD302Week3Lab12026WebAPIS00236888
             _repository = repository;
         }
 
+
+        [Authorize]
         // Must decorate for swagger
         [HttpGet]
         public IEnumerable<Customer> Get()
         {
             ActivityAPIClient.Track(StudentID: "S00236888", StudentName: "Ryan McClelland",
                 activityName: "Rad302 Week 3 Lab 1",
-                Task: "Testing Basic Controller Call");
+                Task: "Testing Authorization");
 
             return _repository.GetAll();
         }
